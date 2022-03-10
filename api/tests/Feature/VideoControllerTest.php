@@ -34,11 +34,9 @@ class VideoControllerTest extends TestCase
         /** @var Video $video */
         $video = $response->baseResponse->original;
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $response->assertJsonStructure([
-            'data' => [
-                'id', 'path'
-            ]
+            'id','path'
         ]);
         $this->assertNotNull($video);
         Storage::assertExists($video->path);
@@ -48,22 +46,22 @@ class VideoControllerTest extends TestCase
     public function test_get_videos ()
     {
         Video::factory()->count(3)->create();
-        $response = $this->get('/api/videos');
+
+        $response = $this->get('/api/video');
+
         $response
             ->assertStatus(200)
-            ->assertJsonCount(3, 'data');
+            ->assertJsonCount(3);
     }
 
     public function test_get_single_video ()
     {
         $video = Video::factory()->create();
-        $response = $this->get("/api/videos/{$video->getKey()}");
+        $response = $this->get("/api/video/{$video->getKey()}");
         $response
             ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
                     'id', 'path'
-                ]
             ]);
     }
 }
