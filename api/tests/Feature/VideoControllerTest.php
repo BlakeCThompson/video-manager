@@ -34,7 +34,7 @@ class VideoControllerTest extends TestCase
         /** @var Video $video */
         $video = $response->baseResponse->original;
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
                 'id', 'path'

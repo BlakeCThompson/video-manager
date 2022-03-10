@@ -17,6 +17,6 @@ use Illuminate\Support\Carbon;
 class Video extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     protected $table = 'videos';
 }
