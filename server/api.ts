@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.send({message: 'Hello world!'});
 });
 
-app.get('/videos', async (req, res) => {
+app.get('/video', async (req, res) => {
   const connection = await getConnection();
 
   const [rows, fields] = await connection.execute('SELECT * FROM videos');

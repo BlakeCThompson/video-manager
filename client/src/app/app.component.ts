@@ -41,6 +41,10 @@ export class AppComponent implements OnInit {
   openUpload() {
     const dialogRef = this.dialog.open<UploadDialogComponent, any, UserVideo>(UploadDialogComponent);
     dialogRef.afterClosed().pipe(
+
+        // Ignore if they close/cancel the dialog
+        filter((result: UserVideo|undefined): result is UserVideo => result != null),
+
       // Log out what they did
       tap((result: UserVideo|undefined) => {
         console.log('Dialog result:', result ?? 'canceled');

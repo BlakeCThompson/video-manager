@@ -31,7 +31,7 @@ describe('UploadService', () => {
         expect(videos[0].path).toBe('bogus/path');
       });
       const req = http.expectOne(
-        `${environment.apiBaseUrl}/videos`
+        `${environment.apiBaseUrl}/video`
       );
       expect(req.request.method).toBe('GET');
       req.flush([{ id: 1, path: 'bogus/path' }]);
@@ -48,7 +48,7 @@ describe('UploadService', () => {
         expect(video.path).toBe('bogus/path');
       });
       const req = http.expectOne(
-        `${environment.apiBaseUrl}/videos`
+        `${environment.apiBaseUrl}/video`
       );
       expect(req.request.method).toBe('POST');
       req.flush({ id: 1, path: 'bogus/path' });

@@ -11,7 +11,7 @@ export class UploadService {
   constructor(private http: HttpClient) { }
 
   getVideos(): Observable<UserVideo[]> {
-    return this.http.get<UserVideo[]>(`${environment.apiBaseUrl}/videos`);
+    return this.http.get<UserVideo[]>(`${environment.apiBaseUrl}/video`);
   }
 
   upload(file: File): Observable<UserVideo> {
@@ -21,6 +21,6 @@ export class UploadService {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json');
 
-    return this.http.post<UserVideo>(`${environment.apiBaseUrl}/videos`, formData, {headers});
+    return this.http.post<UserVideo>(`${environment.apiBaseUrl}/video`, formData, {headers});
   }
 }
