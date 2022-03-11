@@ -7,8 +7,14 @@
 </mat-toolbar>
 <main class="videos">
   <section class="video" *ngFor="let video of videos$ | async">
+      <div>
     <video class="video-player" controls>
       <source src="{{video.path}}" type="video/mp4">
     </video>
+      </div>
+      <div style="text-align: center">
+          <button id="video_{{video.id}}" (click)="openSave(video)">{{video.title}}</button>
+          <p>{{video.description}}</p>
+      </div>
   </section>
 </main>

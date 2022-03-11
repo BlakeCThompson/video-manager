@@ -19,4 +19,5 @@ class Video extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'videos';
+    protected $casts = ['tags'=>'json'];
 }

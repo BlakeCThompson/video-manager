@@ -3,17 +3,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { UploadDialogComponent } from './upload-dialog.component';
+import { SaveDialogComponent } from './save-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UploadService } from '../../services/upload/upload.service';
 import { UserVideo } from '../../services/upload/user-video';
 import { of } from 'rxjs';
 
 describe('SaveDialogComponent', () => {
-  let component: UploadDialogComponent;
-  let fixture: ComponentFixture<UploadDialogComponent>;
+  let component: SaveDialogComponent;
+  let fixture: ComponentFixture<SaveDialogComponent>;
   let uploadService: UploadService;
-  let dialogRefMock!: jasmine.SpyObj<MatDialogRef<UploadDialogComponent, any>>;
+  let dialogRefMock!: jasmine.SpyObj<MatDialogRef<SaveDialogComponent, any>>;
 
   beforeEach(async () => {
     dialogRefMock = jasmine.createSpyObj(['close']);
@@ -24,7 +24,7 @@ describe('SaveDialogComponent', () => {
         MatIconModule,
         MatSnackBarModule
       ],
-      declarations: [ UploadDialogComponent ],
+      declarations: [ SaveDialogComponent ],
       providers: [
         { provide: MatDialogRef, useValue: dialogRefMock }
       ]
@@ -35,7 +35,7 @@ describe('SaveDialogComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadDialogComponent);
+    fixture = TestBed.createComponent(SaveDialogComponent);
     component = fixture.componentInstance;
   });
 

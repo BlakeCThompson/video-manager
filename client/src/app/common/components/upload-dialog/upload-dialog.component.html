@@ -6,6 +6,12 @@
   </button>
   <p class="selected-file" *ngIf="file">{{file.name}}</p>
   <input type="file" name="file" id="file-upload" #fileInput (change)="fileChange($event)">
+    <label>File Name:</label>
+    <input type="text" name="name" id="file-name" #titleInput >
+    <label>File Description:</label>
+    <input type="text" name="name" id="file-description" #descriptionInput>
+    <label>File tags:</label>
+    <input type="text" name="name" id="file-tags" #tagsInput>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="undefined">Cancel</button>

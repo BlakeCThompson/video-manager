@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Edit Video</h2>
+<mat-dialog-content>
+
+    <label>File Name:</label>
+    <input type="text" name="name" id="file-name" #titleInput value="{{videoTitle}}">
+    <label>File Description:</label>
+    <input type="text" name="name" id="file-description" #descriptionInput value="{{videoDescription}}">
+    <label>File tags:</label>
+    <input type="text" name="name" id="file-tags" #tagsInput  value="{{videoTags}}">
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</mat-dialog-actions>

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SaveDialogComponent} from "./common/components/save-dialog/save-dialog.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { UploadDialogComponent } from './common/components/upload-dialog/upload-dialog.component';
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+      SaveDialogComponent
   ],
   imports: [
     BrowserModule,

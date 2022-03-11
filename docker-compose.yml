@@ -24,9 +24,6 @@ services:
             - LOG_CHANNEL=docker
         extra_hosts:
           - "host.docker.internal:host-gateway"
-        php:
-          extra_hosts:
-            "hosts.docker.internal:host-gateway"
 
     db:
         platform: linux/x86_64

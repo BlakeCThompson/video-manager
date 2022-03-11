@@ -64,4 +64,18 @@ class VideoControllerTest extends TestCase
                     'id', 'path'
             ]);
     }
+
+    public function test_update_video ()
+    {
+        $video = Video::factory()->create(['title'=>'firstTitle']);
+        $newTitle = 'secondTitle';
+        $response = $this->patch("/api/video/{$video->getKey()}",['title'=>$newTitle]);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson(['title'=>$newTitle]);
+        $video->refresh();
+        self::assertEquals($video->title, $newTitle);
+    }
+
 }

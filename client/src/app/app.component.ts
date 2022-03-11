@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, mergeMap, Observable, of, scan, shareReplay, startWith, Subject, tap } from 'rxjs';
 import { UploadDialogComponent } from './common/components/upload-dialog/upload-dialog.component';
+import { SaveDialogComponent} from "./common/components/save-dialog/save-dialog.component";
 import { UploadService } from './common/services/upload/upload.service';
 import { UserVideo } from './common/services/upload/user-video';
 
@@ -15,6 +16,7 @@ import { UserVideo } from './common/services/upload/user-video';
 export class AppComponent implements OnInit {
   videos$: Observable<UserVideo[]> = of([]);
   upload$: Subject<UserVideo> = new Subject<UserVideo>();
+    private _video: any;
 
   constructor(private dialog: MatDialog, private snackbar: MatSnackBar, private upload: UploadService) {}
 
@@ -61,4 +63,38 @@ export class AppComponent implements OnInit {
     // No need to unsubscribe because afterClosed emits complete that will clean up this subscription
     ).subscribe((result: UserVideo) => this.upload$.next(result));
   }
+    openSave(video: any) {
+        this._video = video;
+        let dialogRef = this.dialog.open<SaveDialogComponent, any, UserVideo>(SaveDialogComponent);
+
+        dialogRef.afterOpened().pipe(
+            // @ts-ignore
+            dialogRef.componentInstance.videoId = video.id,
+            dialogRef.componentInstance.videoTitle = video.title,
+        dialogRef.componentInstance.videoDescription = video.description,
+            dialogRef.componentInstance.videoTags = video.tags
+        );
+        dialogRef.afterClosed().pipe(
+
+            // Ignore if they close/cancel the dialog
+            filter((result: UserVideo|undefined): result is UserVideo => result != null),
+
+            // Log out what they did
+            tap((result: UserVideo|undefined) => {
+                console.log('Dialog result:', result ?? 'canceled');
+            }),
+
+            // Show success message
+            tap(() => {
+                this.snackbar.open('Video uploaded successfully', undefined, { duration: 4000 });
+            }),
+
+            // Ignore if they close/cancel the dialog
+            filter((result: UserVideo|undefined): result is UserVideo => result != null),
+
+
+
+            // No need to unsubscribe because afterClosed emits complete that will clean up this subscription
+        ).subscribe((result: UserVideo) => this.upload$.next(result));
+    }
 }
