@@ -78,4 +78,13 @@ class VideoControllerTest extends TestCase
         self::assertEquals($video->title, $newTitle);
     }
 
+    public function test_add_too_big_video() {
+        Storage::fake('public');
+        $mp4 = UploadedFile::fake()->create('my-video.mp4', 50001, 'video/mp4');
+        $response = $this->post('/api/video', [
+            'video' => $mp4
+        ]);
+
+        $response->assertStatus(422);
+    }
 }
